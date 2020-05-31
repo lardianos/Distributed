@@ -1,0 +1,68 @@
+% Writed by: Stavros Papantonakis
+%
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+%
+\setcounter{section}{0}
+\section{Απάντηση}
+
+\noindent
+Αρχικά χρειαζόμαστε 5 αρχεία για να υλοποιήσουμε την εφαρμογή μας
+HRInterface.java, HRImpl.java, HRServer.java, HRListener.java, HRClient.java.
+\subsection{HRInterface.java}
+\noindent 
+Σε αυτό το αρχείο δημιουργούμε ένα interface οπού κάνει extends το java.rmi.Remote. Μέσα στο interface δηλώνουμε της μεθόδους που θα μπορεί
+ να καλέσει ο Client για να της εκτελέσει ο Server. όλες η μέθοδοι κάνουν
+  throws το java.rmi.RemoteException. Εμείς έχουμε δηλώσει 5 μεθόδους.
+\begin{itemize}
+	\item String[] prit\_list()
+	\item String[] book\_reservations(String Type,String num, String Name)
+	\item Hashtable<Integer, String[]> print\_guests\_list()
+	\item Hashtable<Integer, String[]> cancel\_book(String Type,String num, String Name)
+	\item void add\_book\_listener(HRListener hrlistener, String Type)
+\end{itemize}
+
+\subsection{HRImpl.java}
+\noindent 
+Σε αυτό το αρχείο υλοποιούμε όλες της μεθόδους που δηλώσαμε στο HRInterface.java. Αρχικά χρησιμοποιήσουμε 5 μεταβλητές για τον αριθμό δωματίων και άλλες 5 για το κόστος δωματίων, χρειαζόμαστε επίσης και 5 λίστες
+μια για κάθε τύπο δωματίου στης οποίες θα εγγράφονται η client που επιθυμούν
+να ενημερωθούν σε περίπτωση που αδειάσουν δωμάτια, τέλος χρησιμοποιούμε ένα
+Hashtable για να αποθηκεύσουμε της κρατήσεις. 
+
+\noindent
+Στον κατασκευαστή αρχικοποιούμε όλες τις τιμές που χρειαζόμαστε και καλούμε
+και τον κατασκευαστή της υπερκλάσης super().
+
+\noindent
+κάνουμε override την μέθοδο run η οποία καλείτε από το thread του server.
+Aυτή η μέθοδος ελέγχει αν η λίστες δεν είναι γεμάτες και αν τα δωμάτια δεν
+είναι 0 και καλή την notifyHRListeners με αντίστοιχη παράμετρο τύπου δωματίου
+για να ενημέρωση τους εκάστοτε clients.
+
+\noindent
+Στην μέθοδο prit\_list() δημιουργούμε ένα String Array με το ποσά δωμάτια
+έχουμε και την επιστρέφουμε έτσι ώστε να μπορεί να την τυπώσει ο client.
+
+\noindent
+Στην μέθοδο book\_reservations περνούμε ως είσοδο τρία Strings τα String Type,String num, String Name και ελέγχοντας το Type υπολογίζουμε το κόστος αναγράφουμε
+την εγγραφή στο Hashtable και επιστρέφουμε στον client ένα String Array με
+την εγγραφή και το κόστος. Σε περίπτωση που δεν υπάρχουν αρκετά δωμάτια
+του επιστρέφουμε τον αριθμό δωματίου και αν θέλει κάνει κράτηση με αυτά τα
+δωμάτια.
+
+Στην μέθοδο print\_guests\_list τυπώνουμε τα περιεχόμενα του επιστρέφουμε
+τον Hashtable στον client έτσι ώστε να τύπωση τα περιεχόμενα του.
+
+Στην μέθοδο cancel\_book περνούμε ως είσοδο πάλι τα String Type,String num, String Name και εντοπίζουμε αν υπάρχει κράτηση με αυτό το όνομα και τύπο
+δωματίου. Αν υπαρχή ελέγχουμε αν έχει τόσα δωμάτια, τέλος ακυρώνουμε 
+αυτόν τον αριθμό δωματίων και επιστρέφουμε ένα hashtable με τα δωμάτια. 
+
+(\textbf{Λόγω χρόνου δεν προλαβαίνω να τελειώσω το documentation})
+
+\subsection{HRServer.java}
+
+\subsection{HRListener.java}
+
+\subsection{HRClient.java}
+
+
