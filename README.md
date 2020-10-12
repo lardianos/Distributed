@@ -1,2 +1,2 @@
 # Distributed
-RPC, Java RMI. Corba, Condor
+RPC, Java RMI
