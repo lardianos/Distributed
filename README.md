@@ -7,4 +7,4 @@ RPC calculator Client/server and Socket Client/server
 
 
 # Java RMI Project
-Hotel Reservation system RMI Client/Server
+Hotel Reservation system with RMI Client/Server
